@@ -1,0 +1,35 @@
+plugins {
+  id 'org.springframework.boot' version '2.3.6.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+  id 'java'
+  id 'eclipse'
+  id 'eclipse-wtp'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://repo1.maven.org/maven2/"
+  }
+}
+
+dependencies {
+  annotationProcessor 'org.projectlombok:lombok:1.18.4'
+  
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+  compile 'org.springframework.cloud:spring-cloud-starter-netflix-zuul:2.2.6.RELEASE'
+  compileOnly 'org.projectlombok:lombok:1.18.4'
+  
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
+}
+
+test {
+  useJUnitPlatform()
+}

@@ -1,0 +1,15 @@
+welcome:
+  message: Start springboot-vuejs Sample Application
+server:
+  port: 9001
+
+spring:
+  thymeleaf:
+    cache: false
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    nodejs:
+      path: /js/**
+      url: http://localhost:9000/js

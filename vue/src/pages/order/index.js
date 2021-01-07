@@ -1,9 +1,8 @@
 import Vue from 'vue'
-import Index from '@/components/home.vue'
+import Order from '@/views/order/'
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(Index)
+  render: h => h(Order)
 }).$mount('#app')
-

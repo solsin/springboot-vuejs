@@ -1,8 +1,9 @@
 <template>
   <div>
-    <home1></home1>
-    <home2></home2>
-    <home3></home3>
+    <div v-if="loading" class="article-preview">loading...</div>
+    <div>
+      <p>주문</p>
+    </div>
   </div>
 </template>
 
@@ -12,26 +13,23 @@
   // install Swiper components
   SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   import axios from 'axios'
-  import home1 from './home/home1.vue'
-  import home2 from './home/home2.vue'
-  import home3 from './home/home3.vue'
-  
+
   export default {
     components: {
-      home1,home2,home3
+
     },
     data () {
       return {
         loading: true,
-        errored: false
+        errored: false,
+        ds: [] // default data container
       }
     },
     mounted() {
-      var 
       axios
         .get('/api/main')
         .then(response => {
-          home1.entity.slide = response.data.home1
+          this.ds = response.data
         })
         .catch(error => {
           console.log(error)

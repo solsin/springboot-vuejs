@@ -1,11 +1,24 @@
+spring:
+  profiles:
+    active: local
+
 welcome:
   message: Start springboot-vuejs Sample Application
 server:
   port: 9001
 
+---
 spring:
-  thymeleaf:
+  profiles: local
+  thymeleaf: # Thymeleaf
     cache: false
+    mode: HTML
+    encoding: UTF-8
+    #prefix: file:src/main/resources/templates/
+  resources: # Static resources
+    static-locations: file:src/main/resources/static/
+    cache:
+      period: 0
 
 zuul:
   ignoredServices: '*'
@@ -13,3 +26,6 @@ zuul:
     nodejs:
       path: /js/**
       url: http://localhost:9000/js
+
+nodejs:
+  proxy: enabled

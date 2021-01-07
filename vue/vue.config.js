@@ -1,41 +1,42 @@
-module.exports = {  
-  outputDir: "../src/main/resources/static",  
-  //indexPath: "../static/index.html",  
-  devServer: {  
+module.exports = {
+  outputDir: "../src/main/resources/static",
+  //indexPath: "../static/index.html",
+  devServer: {
     port: 9000,
     proxy: {
         "/api": {
             target: "http://localhost:9001"
         }
     }
-  },  
-  chainWebpack: config => {  
-    const svgRule = config.module.rule("svg");    
-    svgRule.uses.clear();    
-    svgRule.use("vue-svg-loader").loader("vue-svg-loader");  
+  },
+  chainWebpack: config => {
+    const svgRule = config.module.rule("svg");
+    svgRule.uses.clear();
+    svgRule.use("vue-svg-loader").loader("vue-svg-loader");
   },
   pages: {
-    index: {
-      // entry for the page
-      entry: 'src/pages/index/main.js',
-      // the source template
-      template: 'public/index.html',
-      // output as dist/index.html
-      filename: 'index.html'
-    },
-    home: {
-      entry: 'src/pages/home/main.js',
-      template: 'public/home.html',
-      filename: 'home.html'
+    display: {
+      entry: 'src/pages/display/index.js',
+      template: 'public/display.html',
+      filename: 'build/home.html'
     },
     order: {
-        entry: 'src/pages/order/main.js',
+        entry: 'src/pages/order/index.js',
         template: 'public/order.html',
-        filename: 'order.html',
+        filename: 'build/order.html',
         title: 'Order Page'
+    },
+  },
+  css: {
+    loaderOptions: {
+      // by default the `sass` option will apply to both syntaxes
+      // because `scss` syntax is also processed by sass-loader underlyingly
+      // but when configuring the `prependData` option
+      // `scss` syntax requires an semicolon at the end of a statement, while `sass` syntax requires none
+      // in that case, we can target the `scss` syntax separately using the `scss` option
+      scss: {
+        additionalData: `@import "~@/components/variables.scss";`
+      }
     }
-  }
-  // 메인/상품리스트,상품상세
-  // 장바구니/주문/주문결과
-  // 마이페이지
+  },
 };
